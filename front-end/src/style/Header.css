@@ -1,0 +1,35 @@
+@media only screen and ( min-width : 320px ) and ( max-device-width : 425px ) {
+
+  .header-container {
+    align-items: center;
+    background: linear-gradient(90deg, #ff7900 0%, #e85d04 50%, #ff7900 100%);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .btn-search {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    height: 40px;
+    width: 40px;
+  }
+
+  .search-icon {
+    color: white;
+    height: 100%;
+    width: 100%;
+  }
+
+  .btn-profile {
+    height: 40px;
+    width: 40px;
+  }
+
+  .profile-icon {
+    color: white;
+    height: 100%;
+    width: 100%;
+  }
+}

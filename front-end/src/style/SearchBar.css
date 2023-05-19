@@ -1,0 +1,70 @@
+@media only screen and ( min-width : 320px ) and ( max-device-width : 425px ) {
+
+  .search-bar-container {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: space-around;
+    margin: 10px auto;
+    width: 95%;
+  }
+
+  .search-button-container {
+    width: 100%;
+  }
+
+  .search-input {
+    border: 2px solid rgb(232, 93, 4);
+    border-bottom-left-radius: 5px;
+    border-right: none;
+    border-top-left-radius: 5px;
+    outline: 0;
+    padding: 10px;
+    width: 90%;
+  }
+
+  .exec-search-btn {
+    background-color: white;
+    border: 2px solid rgb(232, 93, 4);
+    border-bottom-right-radius: 5px;
+    border-left: none;
+    border-top-right-radius: 5px;
+    height: 41px;
+    width: 10%;
+  }
+
+  .exec-search-btn-incon {
+    color: rgb(232, 93, 4);
+    width: 100%;
+  }
+
+  .search-radio {
+    appearance: none;
+    border: 2px solid rgb(232, 93, 4);
+    border-radius: 50%;
+    cursor: pointer;
+    height: 18px;
+    margin-right: 5px;
+    position: relative;
+    width: 18px;
+  }
+
+  .search-radio:before {
+    background-color: rgb(232, 93, 4);
+    border-radius: 50%;
+    content: '';
+    height: 10px;
+    left: 2px;
+    margin-right: 5px;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 2px;
+    width: 10px;
+  }
+
+  .search-radio:checked:before {
+    opacity: 1;
+  }
+}

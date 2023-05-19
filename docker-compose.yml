@@ -1,0 +1,47 @@
+version: '3.9'
+services:
+  frontend:
+    build: ./front-end
+    container_name: recipes-app-fron-tend
+    ports:
+      - 3000:3000
+    working_dir: /front-end
+    volumes:
+      - ./front-end/src:/front-end/src
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3000"]
+      timeout: 10s
+      retries: 5
+  backend:
+    build: ./back-end
+    container_name: recipes-app-back-end
+    ports:
+      - 3001:3001
+    working_dir: /back-end
+    volumes:
+      - ./back-end/src:/back-end/src
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3001"]
+      timeout: 10s
+      retries: 5
+    command: dev
+    env_file:
+      - ./back-end/.env
+  db:
+    image: mysql:8.0.21
+    container_name: recipes-app-db
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=123123
+    restart: 'always'
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 5

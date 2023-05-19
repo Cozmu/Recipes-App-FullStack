@@ -1,0 +1,210 @@
+/* stylelint-disable value-list-comma-space-before */
+
+/* stylelint-disable-next-line length-zero-no-unit */
+
+/* stylelint-disable-next-line length-zero-no-unit */
+
+/* stylelint-disable length-zero-no-unit */
+
+@media only screen and ( min-width : 320px ) and ( max-device-width : 425px ) {
+
+  .recipe-photo-container {
+    height: 425px;
+    position: relative;
+  }
+
+  .back-icon {
+    color: #dee2e6;
+    font-size: 30px;
+    padding: 10px;
+    position: absolute;
+  }
+
+  .recipe-photo {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+    height: 100%;
+    width: 100%;
+  }
+
+  .titles-and-btns-container {
+    align-items: center;
+    display: flex;
+    height: 120px;
+    justify-content: space-between;
+    padding: 10px;
+    position: relative;
+  }
+
+  .buttons-container {
+    position: absolute;
+    right: 0;
+    top: 40px;
+  }
+
+  .instructions-container-in-progress {
+    margin-bottom: 70px;
+  }
+
+  .instructions-container-in-progress p {
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px
+      , rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    margin: auto;
+    padding: 10px;
+    width: 90%;
+  }
+
+  .instructions-container-in-progress h1 {
+    margin: auto;
+    padding: 10px;
+    text-align: start;
+    width: 90%;
+  }
+
+  .instructions-container {
+    margin-bottom: 20px;
+  }
+
+  .instructions-container p {
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px
+      , rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    margin: auto;
+    padding: 10px;
+    width: 90%;
+  }
+
+  .instructions-container h1 {
+    margin: auto;
+    padding: 10px;
+    text-align: start;
+    width: 90%;
+  }
+
+  .ingredients-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ingredients-container .ingredientes-checked {
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px
+      , rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: auto;
+    margin-bottom: 40px;
+    padding: 10px;
+    width: 90%;
+  }
+
+  .ingredients-container .checked {
+    margin-right: 10px;
+  }
+
+  .ingredient-step {
+    text-decoration: line-through solid black;
+  }
+
+  .ingredients-container h1 {
+    margin: auto;
+    padding: 10px;
+    text-align: start;
+    width: 90%;
+  }
+
+  .ingredients-container ul {
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px
+      , rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    margin: auto;
+    margin-bottom: 40px;
+    padding: 10px;
+    width: 90%;
+  }
+
+  .ingredients-container li {
+    margin-left: 25px;
+  }
+
+  .recommendations h2 {
+    margin: auto;
+    padding: 10px;
+    text-align: start;
+    width: 90%;
+  }
+
+  .recommendationCard-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 70px;
+    overflow-x: scroll;
+  }
+
+  .recommendationCard {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    min-width: 180px;
+  }
+
+  .recommendationCard img {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 120px;
+  }
+
+  .recommendationCard p {
+    background-color: rgb(255, 136, 0);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: white;
+    text-align: start;
+    text-decoration: underline;
+    text-decoration-color: rgb(255, 136, 0);
+    width: 120px;
+  }
+
+  .start-recipe-btn {
+    background-color: #bc3908;
+    border: none;
+    border-radius: 5px;
+    bottom: 0;
+    color: white;
+    font-size: large;
+    height: 40px;
+    margin-left: 5%;
+    margin-right: 5%;
+    position: fixed;
+    width: 90%;
+  }
+
+  .start-recipe-btn:disabled {
+    background-color: rgb(141, 140, 140);
+    border: none;
+    border-radius: 5px;
+    bottom: 0;
+    color: rgb(87, 86, 86);
+    font-size: large;
+    height: 40px;
+    margin-left: 5%;
+    margin-right: 5%;
+    position: fixed;
+    width: 90%;
+  }
+
+  .iframe-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 90%;
+  }
+
+  .iframe-container .iframe {
+    width: 100%;
+  }
+
+}

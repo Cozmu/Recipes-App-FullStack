@@ -1,0 +1,150 @@
+/* .loginInitial {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+}
+
+.inputs-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.loginInitial label {
+  width: 20%;
+}
+
+.title-container {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-container h1 {
+  font-size: 44px;
+  font-weight: 800;
+}
+
+.inputs-login {
+  border: 2px;
+  border-radius: 10px;
+  display: flex;
+  padding: 1rem;
+  width: 100%;
+}
+
+
+.btnCss {
+  align-items: center;
+  background-color: #bc3908;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-size: 30px;
+  height: 3rem;
+  justify-content: center;
+  transition: 0.7s;
+  width: 20%;
+}
+
+.btnCss:disabled {
+  align-items: center;
+  background-color: rgb(141, 140, 140);
+  color: rgb(87, 86, 86);
+  cursor: not-allowed;
+  display: flex;
+  justify-content: center;
+  width: 20%;
+}
+
+
+.logo {
+  height: 200px;
+  justify-items: center;
+  width: 200px;
+} */
+
+@media only screen and ( min-width : 320px ) and ( max-device-width : 425px ) {
+
+  .loginInitial {
+    align-items: center;
+    background-color: rgb(255, 136, 0);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+  }
+
+  .loginInitial label {
+    width: 70%;
+  }
+
+  .inputs-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  .inputs-login {
+    border: 2px;
+    border-radius: 10px;
+    display: flex;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .title-container {
+    align-items: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title-container h1 {
+    font-size: 44px;
+    font-weight: 800;
+  }
+
+  .logo {
+    height: 160px;
+    width: 160px;
+  }
+
+  .btnCss {
+    align-items: center;
+    background-color: #bc3908;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    font-size: 30px;
+    height: 3rem;
+    justify-content: center;
+    transition: 0.7s;
+    width: 70%;
+  }
+
+  .btnCss:disabled {
+    align-items: center;
+    background-color: rgb(141, 140, 140);
+    color: rgb(87, 86, 86);
+    cursor: not-allowed;
+    display: flex;
+    justify-content: center;
+    width: 70%;
+  }
+}

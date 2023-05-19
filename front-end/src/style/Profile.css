@@ -1,0 +1,43 @@
+/* stylelint-disable value-list-comma-space-before */
+
+/* stylelint-disable length-zero-no-unit */
+
+@media only screen and ( min-width : 320px ) and ( max-device-width : 425px ) {
+
+  .container {
+    align-items: center;
+    display: flex;
+    height: 90vh;
+  }
+
+  .profile-container {
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px
+      , rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    height: 400px;
+    justify-content: center;
+    margin: auto;
+    width: 70%;
+  }
+
+  .profile-container button {
+    background-color: #bc3908;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    height: 40px;
+    padding: 5px;
+    text-align: center;
+    width: 120px;
+  }
+
+  .profile {
+    color: rgb(255, 136, 0);
+    height: 40px;
+    width: 40px;
+  }
+}

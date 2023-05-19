@@ -1,0 +1,94 @@
+/* stylelint-disable length-zero-no-unit */
+
+/* stylelint-disable value-list-comma-space-before */
+
+@media only screen and ( min-width : 320px ) and ( max-device-width : 425px ) {
+
+  .button-filters-container {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+
+  .button-filters-container button {
+    background-color: #bc3908;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    height: 30px;
+    width: 18%;
+  }
+
+  .favorites-recipes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .favorites-recipes {
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px
+      , rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    display: flex;
+    height: 170px;
+    margin: auto;
+    width: 90%;
+  }
+
+  .favorites-recipes .horizontal-image {
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    height: 170px;
+    width: 180px;
+  }
+
+  .information-favorites {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    justify-content: start;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+
+  .link-special-recipes {
+    color: black;
+    text-decoration: none;
+  }
+
+  .buttons-favorites {
+    justify-content: space-evenly;
+    position: relative;
+  }
+
+  .buttons-favorites .share-button {
+    left: 0;
+    position: absolute;
+  }
+
+  .buttons-favorites button {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+  }
+
+  .span {
+    margin-top: 105px;
+    position: absolute;
+  }
+
+  .tag-name-container {
+    margin-top: 130px;
+    position: absolute;
+  }
+
+  .not-recipes-container {
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    width: 100%;
+  }
+
+}
