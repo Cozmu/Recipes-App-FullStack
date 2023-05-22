@@ -4,7 +4,8 @@
   "description": "",
   "main": "./dist/server",
   "scripts": {
-    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "seed": "node ./src/database/seeders/DrinksSeed.js",
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npm run seed",
     "start": "node .",
     "dev": "nodemon --watch \"./src/**\" ./src/server.ts"
   },

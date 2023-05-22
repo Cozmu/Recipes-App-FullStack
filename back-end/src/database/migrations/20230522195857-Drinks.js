@@ -27,7 +27,7 @@ module.exports = {
         field: 'str_category',
       },
       strArea: {
-        allowNull: false, 
+        allowNull: true, 
         type: Sequelize.STRING,
         field: 'str_area',
       },
@@ -42,7 +42,7 @@ module.exports = {
         field: 'str_drink_thumb',
       },
       strTags: {
-        allowNull: false, 
+        allowNull: true, 
         type: Sequelize.STRING,
         field: 'str_tags',
       },
