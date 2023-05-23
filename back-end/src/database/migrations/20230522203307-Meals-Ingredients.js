@@ -3,9 +3,10 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('mealsIgredients', { 
+    await queryInterface.createTable('mealsIngredients', { 
       idMeal: {
         allowNull: false,
+        primaryKey: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'meals',

@@ -50,12 +50,12 @@ module.exports = (sequelize, DataTypes) => {
     },
   );
 
-  // Drinks.associate = (models) => {
-  //   Drinks.hasOne(models.drinksIgredients, {
-  //     foreignKey: { name: 'idDrink', field: 'id_drink' },
-  //     as: 'drinksToIgredients',
-  //   })
-  // }
+  Drinks.associate = (models) => {
+    Drinks.hasOne(models.DrinksIngredients, {
+      foreignKey: { name: 'idDrink', field: 'id_drink' },
+      as: 'drinksToIngredients',
+    })
+  }
 
   return Drinks;
 }

@@ -5,16 +5,16 @@
  * @returns 
 */
 module.exports = (sequelize, DataTypes) => {
-  const MealsIngredients = sequelize.define(
-    'MealsIngredients',
+  const DrinksIngredients = sequelize.define(
+    'DrinksIngredients',
     {
-      idMeal: {
+      idDrink: {
         allowNull: false,
         primaryKey: true,
         type: DataTypes.INTEGER,
         references: {
-          model: 'meals',
-          key: 'id_meal',
+          model: 'drinks',
+          key: 'id_drink',
         },
       },
       strIngredient1: {
@@ -74,26 +74,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       strIngredient15: {
-        allowNull: true,
-        type: DataTypes.STRING,
-      },
-      strIngredient16: {
-        allowNull: true,
-        type: DataTypes.STRING,
-      },
-      strIngredient17: {
-        allowNull: true,
-        type: DataTypes.STRING,
-      },
-      strIngredient18: {
-        allowNull: true,
-        type: DataTypes.STRING,
-      },
-      strIngredient19: {
-        allowNull: true,
-        type: DataTypes.STRING,
-      },
-      strIngredient20: {
         allowNull: true,
         type: DataTypes.STRING,
       },
@@ -157,40 +137,20 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         type: DataTypes.STRING,
       },
-      strMeasure16: {
-        allowNull: true,
-        type: DataTypes.STRING,
-      },
-      strMeasure17: {
-        allowNull: true,
-        type: DataTypes.STRING,
-      },
-      strMeasure18: {
-        allowNull: true,
-        type: DataTypes.STRING,
-      },
-      strMeasure19: {
-        allowNull: true,
-        type: DataTypes.STRING,
-      },
-      strMeasure20: {
-        allowNull: true,
-        type: DataTypes.STRING,
-      },
     },
     {
       timestamps: false,
-      tableName: 'mealsIngredients',
+      tableName: 'drinksIngredients',
       underscored: true,
     }
   )
 
-  MealsIngredients.associate = (models) => {
-    MealsIngredients.belongsTo(models.Meals, {
-      foreignKey: { name: 'idMeal', field: 'id_meal' },
-      as: 'ingredientsTomeals',
+  DrinksIngredients.associate = (models) => {
+    DrinksIngredients.belongsTo(models.Drinks, {
+      foreignKey: { name: 'idDrink', field: 'id_drink' },
+      as: 'ingredientsToDrinks',
     })
   }
 
-  return MealsIngredients;
+  return DrinksIngredients;
 }

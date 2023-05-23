@@ -7,7 +7,7 @@ async function seedMealsIngredients() {
     for (const item of arrMeasuresAndIngredients) {
       await MealsIngredients.create(item); 
     }
-    console.log('Seeds criadas com sucesso!');
+    console.log('Seeds MealsIngredients criadas com sucesso!');
   } catch (error) {
     console.error('Erro ao criar as seeds:', error);
   } 

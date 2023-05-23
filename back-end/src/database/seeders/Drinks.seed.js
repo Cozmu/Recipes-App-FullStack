@@ -7,7 +7,7 @@ async function seedDrinks() {
     for (const item of arrDrinks) {
       await Drinks.create(item); 
     }
-    console.log('Seeds criadas com sucesso!');
+    console.log('Seeds Drinks criadas com sucesso!');
   } catch (error) {
     console.error('Erro ao criar as seeds:', error);
   } 
