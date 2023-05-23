@@ -8,6 +8,13 @@ const getByName = async (name) => {
   return result;
 }
 
+const getAll = async () => {
+  const result = await Drinks.findAll();
+
+  return result;
+}
+
 module.exports = {
   getByName,
+  getAll
 }
