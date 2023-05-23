@@ -2,7 +2,7 @@
   "name": "back-end",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/server",
+  "main": "./src/api/server.js",
   "scripts": {
     "seed": "node ./src/database/seeders/Drinks.seed.js && node ./src/database/seeders/Meals.seed.js && node ./src/database/seeders/MealsIngredients.seed.js && node ./src/database/seeders/DrinksIngredients.seed.js",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npm run seed",
