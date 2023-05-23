@@ -2,7 +2,7 @@ const { Sequelize, sequelize, Model } = require('sequelize');
 const { Drinks } = require('../models/index'); 
 const { arrDrinks } = require('../utils/formatedDrinks');
 
-async function seedData() {
+async function seedDrinks() {
   try {
     for (const item of arrDrinks) {
       await Drinks.create(item); 
@@ -13,4 +13,4 @@ async function seedData() {
   } 
 }
 
-seedData();
+seedDrinks();

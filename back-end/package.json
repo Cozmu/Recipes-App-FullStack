@@ -4,7 +4,7 @@
   "description": "",
   "main": "./dist/server",
   "scripts": {
-    "seed": "node ./src/database/seeders/DrinksSeed.js",
+    "seed": "node ./src/database/seeders/Drinks.seed.js && node ./src/database/seeders/Meals.seed.js",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npm run seed",
     "start": "node .",
     "dev": "nodemon --watch \"./src/**\" ./src/server.ts"

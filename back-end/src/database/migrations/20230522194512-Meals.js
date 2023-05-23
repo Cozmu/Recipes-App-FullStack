@@ -38,7 +38,7 @@ module.exports = {
         field: 'str_meal_thumb',
       },
       strTags: {
-        allowNull: false, 
+        allowNull: true, 
         type: Sequelize.STRING,
         field: 'str_tags',
       },
