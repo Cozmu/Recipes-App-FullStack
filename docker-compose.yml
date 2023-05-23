@@ -12,14 +12,14 @@ services:
       backend:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3000"]
+      test: [ "CMD", "lsof", "-t", "-i:3000" ]
       timeout: 10s
       retries: 5
   backend:
     build: ./back-end
     container_name: recipes-app-back-end
     ports:
-      - 3001:3001
+      - 3008:3001
     working_dir: /back-end
     volumes:
       - ./back-end/src:/back-end/src
@@ -27,7 +27,7 @@ services:
       db:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3001"]
+      test: [ "CMD", "lsof", "-t", "-i:3001" ]
       timeout: 10s
       retries: 5
     command: dev
@@ -42,6 +42,6 @@ services:
       - MYSQL_ROOT_PASSWORD=123123
     restart: 'always'
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       timeout: 10s
       retries: 5
