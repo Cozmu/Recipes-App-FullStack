@@ -5,5 +5,6 @@ const router = express.Router();
 
 // router.get('/', drinksController.getById);
 router.get('/:s', drinksController.getByName);
+router.get('/', drinksController.getAll);
 
 module.exports = router; 
