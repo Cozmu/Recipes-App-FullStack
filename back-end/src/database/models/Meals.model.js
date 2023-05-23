@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
   Meals.associate = (models) => {
     Meals.hasOne(models.MealsIngredients, {
       foreignKey: { name: 'idMeal', field: 'id_meal' },
-      as: 'mealsToIgredients',
+      as: 'mealsToIngredients',
     })
   }
 
