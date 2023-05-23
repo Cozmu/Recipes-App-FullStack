@@ -49,5 +49,13 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   )
+
+  Meals.associate = (models) => {
+    Meals.hasOne(models.MealsIngredients, {
+      foreignKey: { name: 'idMeal', field: 'id_meal' },
+      as: 'mealsToIgredients',
+    })
+  }
+
   return Meals;
 }
