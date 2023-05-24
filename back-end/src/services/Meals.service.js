@@ -1,10 +1,4 @@
-
-// const env = process.env.NODE_ENV || 'development';
-// const Sequelize = require('sequelize');
 const { Meals, MealsIngredients } = require('../database/models/index');
-// const config = require('../database/config/config');
-
-// const sequelize = new Sequelize(config[env]);
 
 const getById = async (id) => {
   const result = await Meals.findOne(
@@ -40,8 +34,61 @@ const getAll = async () => {
   return result;
 }
 
+const getByCateg = async (c) => {
+  const result = await Meals.findAll(
+    {
+      where: { strCategory: c },
+      include: [
+        { model: MealsIngredients, as: 'mealsToIngredients' },
+      ],
+    },
+  );
+  if (!result || result.length === 0) throw new Error('Non-existent category');
+  const resultJs = result.map((meal) => {
+    const newMeal = meal.toJSON();
+    const ingr = newMeal.mealsToIngredients;
+    delete newMeal.mealsToIngredients;
+    return {...newMeal, ...ingr}
+  });
+  return { meals: resultJs };
+};
+
+function ordenarCategorias(array) {
+  array.sort((a, b) => {
+    if (a.strCategory < b.strCategory) {
+      return -1;
+    } else if (a.strCategory > b.strCategory) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+  return array;
+}
+
+const getByCategList = async () => {
+  const result = await Meals.findAll(
+    { include: [
+        { model: MealsIngredients, as: 'mealsToIngredients' },
+      ],
+    });
+  if (!result || result.length === 0) throw new Error('Non-existent category');
+    const newMeal = new Set();
+    result.forEach((meal) => {
+      const catg = meal.toJSON();
+      const {strCategory} = catg;
+      newMeal.add(strCategory);
+    });
+    const arrayMeals = Array.from(newMeal);
+    const newArrayMeals = arrayMeals.map((category) => ({strCategory: category}))
+    const sortedMeals = ordenarCategorias(newArrayMeals)
+    return { meals: sortedMeals };
+};
+
 module.exports = {
   getByName,
   getAll,
   getById,
+  getByCateg,
+  getByCategList,
 }
