@@ -50,7 +50,39 @@ const getByCateg = async (c) => {
     delete newDrink.drinksToIngredients;
     return {...newDrink, ...ingr}
   });
-  return { meals: resultJs };
+  return { drinks: resultJs };
+};
+
+function ordenarCategorias(array) {
+  array.sort((a, b) => {
+    if (a.strCategory < b.strCategory) {
+      return -1;
+    } else if (a.strCategory > b.strCategory) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+  return array;
+}
+
+const getByCategList = async () => {
+  const result = await Drinks.findAll(
+    { include: [
+        { model: DrinksIngredients, as: 'drinksToIngredients' },
+      ],
+    });
+  if (!result || result.length === 0) throw new Error('Non-existent category');
+    const newDrik = new Set();
+    result.forEach((drink) => {
+      const catg = drink.toJSON();
+      const {strCategory} = catg;
+      newDrik.add(strCategory);
+    });
+    const arrayDrinks = Array.from(newDrik);
+    const newArrayDrinks = arrayDrinks.map((category) => ({strCategory: category}))
+    const sortedDrinks = ordenarCategorias(newArrayDrinks)
+    return { drinks: sortedDrinks };
 };
 
 module.exports = {
@@ -58,4 +90,5 @@ module.exports = {
   getAll,
   getById,
   getByCateg,
+  getByCategList,
 }

@@ -53,9 +53,42 @@ const getByCateg = async (c) => {
   return { meals: resultJs };
 };
 
+function ordenarCategorias(array) {
+  array.sort((a, b) => {
+    if (a.strCategory < b.strCategory) {
+      return -1;
+    } else if (a.strCategory > b.strCategory) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+  return array;
+}
+
+const getByCategList = async () => {
+  const result = await Meals.findAll(
+    { include: [
+        { model: MealsIngredients, as: 'mealsToIngredients' },
+      ],
+    });
+  if (!result || result.length === 0) throw new Error('Non-existent category');
+    const newMeal = new Set();
+    result.forEach((meal) => {
+      const catg = meal.toJSON();
+      const {strCategory} = catg;
+      newMeal.add(strCategory);
+    });
+    const arrayMeals = Array.from(newMeal);
+    const newArrayMeals = arrayMeals.map((category) => ({strCategory: category}))
+    const sortedMeals = ordenarCategorias(newArrayMeals)
+    return { meals: sortedMeals };
+};
+
 module.exports = {
   getByName,
   getAll,
   getById,
   getByCateg,
+  getByCategList,
 }
