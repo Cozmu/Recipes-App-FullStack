@@ -2,7 +2,7 @@ version: '3.9'
 services:
   frontend:
     build: ./front-end
-    container_name: recipes-app-fron-tend
+    container_name: recipes-app-front-end
     ports:
       - 3000:3000
     working_dir: /front-end
@@ -37,7 +37,7 @@ services:
     image: mysql:8.0.21
     container_name: recipes-app-db
     ports:
-      - 3306:3306
+      - 3307:3306
     environment:
       - MYSQL_ROOT_PASSWORD=123123
     restart: 'always'
