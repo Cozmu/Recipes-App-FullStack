@@ -1,4 +1,6 @@
 const { Drinks, DrinksIngredients } =  require('../database/models/index');
+const { Op } = require('sequelize');
+
 
 const getById = async (id) => {
   const result = await Drinks.findOne(
@@ -21,17 +23,82 @@ const getById = async (id) => {
 };
 
 const getByName = async (name) => {
-  const result = await Drinks.findOne({where: {str_drink: name}});
+  const results = await Drinks.findAll(
+    {
+      where: {str_drink: name},
+      include: [
+        { model: DrinksIngredients, as: 'drinksToIngredients' },
+      ],
+    }
+  );
 
-  if(!result) throw new Error('Drink not found'); 
+  if(!results || results.length === 0) throw new Error('Drink not found'); 
 
-  return result;
+  const drinks = results.map((result) => {
+    const resultJs = result.toJSON();
+    const { drinksToIngredients } = resultJs;
+    delete resultJs.drinksToIngredients;
+
+    const resultWithOutAlias = {
+      ...resultJs, 
+      ...drinksToIngredients
+    }
+    return resultWithOutAlias;
+  });
+
+  return { drinks };
 }
 
 const getAll = async () => {
-  const result = await Drinks.findAll();
+  const results = await Drinks.findAll(
+    {
+      include: [
+        { model: DrinksIngredients, as: 'drinksToIngredients' },
+      ],
+    });
 
-  return result;
+  const drinks = results.map((result) => {
+    const resultJs = result.toJSON();
+    const { drinksToIngredients } = resultJs;
+    delete resultJs.drinksToIngredients;
+  
+    const resultWithOutAlias = {
+      ...resultJs, 
+      ...drinksToIngredients
+    }
+    return resultWithOutAlias;
+  });
+  
+    return { drinks };
+}
+
+const getByLetter = async (letter) => {
+  const results = await Drinks.findAll(
+    {
+      where: {
+        str_drink: {[Op.like]: `${letter}%`}
+      },
+      include: [
+        { model: DrinksIngredients, as: 'drinksToIngredients' },
+      ],
+    }
+  )
+
+  if(!results || results.length === 0) throw new Error('Drink not found'); 
+
+  const drinks = results.map((result) => {
+    const resultJs = result.toJSON();
+    const { drinksToIngredients } = resultJs;
+    delete resultJs.drinksToIngredients;
+
+    const resultWithOutAlias = {
+      ...resultJs, 
+      ...drinksToIngredients
+    }
+    return resultWithOutAlias;
+  });
+
+  return { drinks };
 }
 
 const getByCateg = async (c) => {
@@ -88,6 +155,7 @@ const getByCategList = async () => {
 module.exports = {
   getByName,
   getAll,
+  getByLetter
   getById,
   getByCateg,
   getByCategList,
