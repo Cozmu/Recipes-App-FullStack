@@ -82,6 +82,7 @@
   }
 
   .tag-name-container {
+    display: none;
     margin-top: 130px;
     position: absolute;
   }
