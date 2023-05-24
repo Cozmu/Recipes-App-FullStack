@@ -27,17 +27,42 @@ const getById = async (id) => {
 };
 
 const getByName = async (name) => {
-  const result = await Meals.findOne({where: {str_meal: name}});
+  const result = await Meals.findOne(
+    {
+      where: {str_meal: name}, 
+      include: [
+        { model: MealsIngredients, as: 'mealsToIngredients' },
+      ],
+    }
+    );
 
   if(!result) throw new Error('Meal not found'); 
-
-  return result;
+  const resultJs = result.get();
+  const { mealsToIngredients } = resultJs;
+  delete resultJs.mealsToIngredients;
+  const resultWithOutAlias = {
+    ...resultJs,
+    ...mealsToIngredients.get()
+  }
+  return { meals: resultWithOutAlias };
 }
 
 const getAll = async () => {
-  const result = await Meals.findAll();
-
-  return result;
+  const result = await Meals.findAll(
+    {
+      include: [
+        { model: MealsIngredients, as: 'mealsToIngredients' },
+      ],
+    }
+  );
+  const resultJs = result.get();
+  const { mealsToIngredients } = resultJs;
+  delete resultJs.mealsToIngredients;
+  const resultWithOutAlias = {
+    ...resultJs,
+    ...mealsToIngredients.get()
+  }
+  return { meals: resultWithOutAlias };
 }
 
 module.exports = {
