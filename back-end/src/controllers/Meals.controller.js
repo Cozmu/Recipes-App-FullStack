@@ -10,6 +10,25 @@ const getById = async (req, res, next) => {
   }
 };
 
+const category = async (req, res, next) => {
+  try {
+    const { c } = req.params;
+    const result = await mealService.getByCateg(c);
+    return res.status(200).json(result);
+  } catch (error) {
+    next({ ...error, message: error.message, status: 404 });
+  }
+};
+
+const categoryList = async (req, res, next) => {
+  try {
+    const result = await mealService.getByCategList();
+    return res.status(200).json(result);
+  } catch (error) {
+    next({ ...error, message: error.message, status: 404 });
+  }
+};
+
 const getByName = async (req, res, next) => {
   try {
     const { s } = req.params;
@@ -44,4 +63,6 @@ module.exports = {
   getAll,
   getById,
   getByLetter
+  category,
+  categoryList,
 }
