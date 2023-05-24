@@ -31,6 +31,6 @@ const getAll = async (req, res, next) => {
 
 module.exports = {
   getByName,
-  getAll
-  getById,
+  getAll,
+  getById
 }
