@@ -27,7 +27,7 @@ const getById = async (id) => {
 };
 
 const getByName = async (name) => {
-  const result = await Meals.findOne(
+  const results = await Meals.findAll(
     {
       where: {str_meal: name}, 
       include: [
@@ -35,34 +35,47 @@ const getByName = async (name) => {
       ],
     }
     );
+  if(!results || results.length === 0) throw new Error('Meal not found'); 
 
-  if(!result) throw new Error('Meal not found'); 
-  const resultJs = result.get();
-  const { mealsToIngredients } = resultJs;
-  delete resultJs.mealsToIngredients;
-  const resultWithOutAlias = {
-    ...resultJs,
-    ...mealsToIngredients.get()
-  }
-  return { meals: resultWithOutAlias };
+  const meals = results.map((result) => {
+    const resultJs = result.toJSON();
+    const { mealsToIngredients } = resultJs;
+    delete resultJs.mealsToIngredients;
+    delete result.mealsToIngredients;
+
+    const resultWithOutAlias = {
+      ...resultJs, 
+      ...mealsToIngredients
+    }
+    return resultWithOutAlias;
+  });
+
+  return { meals };
 }
 
 const getAll = async () => {
-  const result = await Meals.findAll(
+  const results = await Meals.findAll(
     {
       include: [
         { model: MealsIngredients, as: 'mealsToIngredients' },
       ],
     }
   );
-  const resultJs = result.get();
-  const { mealsToIngredients } = resultJs;
-  delete resultJs.mealsToIngredients;
-  const resultWithOutAlias = {
-    ...resultJs,
-    ...mealsToIngredients.get()
-  }
-  return { meals: resultWithOutAlias };
+
+  const meals = results.map((result) => {
+    const resultJs = result.toJSON();
+    const { mealsToIngredients } = resultJs;
+    delete resultJs.mealsToIngredients;
+    delete result.mealsToIngredients;
+
+    const resultWithOutAlias = {
+      ...resultJs, 
+      ...mealsToIngredients
+    }
+    return resultWithOutAlias;
+  });
+
+  return { meals };
 }
 
 module.exports = {
