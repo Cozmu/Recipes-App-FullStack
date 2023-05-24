@@ -10,6 +10,16 @@ const getById = async (req, res, next) => {
   }
 };
 
+const category = async (req, res, next) => {
+  try {
+    const { c } = req.params;
+    const result = await mealService.getByCateg(c);
+    return res.status(200).json(result);
+  } catch (error) {
+    next({ ...error, message: error.message, status: 404 });
+  }
+};
+
 const getByName = async (req, res, next) => {
   try {
     const { s } = req.params;
@@ -31,6 +41,7 @@ const getAll = async (req, res, next) => {
 
 module.exports = {
   getByName,
-  getAll
+  getAll,
   getById,
+  category,
 }

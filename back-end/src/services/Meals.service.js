@@ -1,10 +1,4 @@
-
-// const env = process.env.NODE_ENV || 'development';
-// const Sequelize = require('sequelize');
 const { Meals, MealsIngredients } = require('../database/models/index');
-// const config = require('../database/config/config');
-
-// const sequelize = new Sequelize(config[env]);
 
 const getById = async (id) => {
   const result = await Meals.findOne(
@@ -40,8 +34,28 @@ const getAll = async () => {
   return result;
 }
 
+const getByCateg = async (c) => {
+  const result = await Meals.findAll(
+    {
+      where: { strCategory: c },
+      include: [
+        { model: MealsIngredients, as: 'mealsToIngredients' },
+      ],
+    },
+  );
+  if (!result || result.length === 0) throw new Error('Non-existent category');
+  const resultJs = result.map((meal) => {
+    const newMeal = meal.toJSON();
+    const ingr = newMeal.mealsToIngredients;
+    delete newMeal.mealsToIngredients;
+    return {...newMeal, ...ingr}
+  });
+  return { meals: resultJs };
+};
+
 module.exports = {
   getByName,
   getAll,
   getById,
+  getByCateg,
 }
