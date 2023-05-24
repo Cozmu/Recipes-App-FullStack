@@ -18,7 +18,7 @@ function SpecialRecipes({ localRecipe }) {
 
   const handleCopy = (elemento) => {
     const TIME = 3000;
-    setToggleShare(elemento.id);
+    setToggleShare(elemento.name);
     copy(`http://localhost:3000/${elemento.type === 'meal' ? 'meals' : 'drinks'}/${elemento.id}`);
     setTimeout(() => {
       setToggleShare('');
@@ -136,7 +136,7 @@ function SpecialRecipes({ localRecipe }) {
                 />}
                 </div>
               </section>
-              {toggleShare === element.id && <span className="span">Link copied!</span>}
+              {toggleShare === element.name && <span className="span">Link copied!</span>}
 
               {element?.tags
                 && element?.tags.map((tagName, i) => (
