@@ -1,4 +1,5 @@
 const { Drinks, DrinksIngredients } =  require('../database/models/index');
+const { Op } = require('sequelize');
 
 const getByName = async (name) => {
   const results = await Drinks.findAll(
@@ -10,7 +11,7 @@ const getByName = async (name) => {
     }
   );
 
-  if(!results) throw new Error('Drink not found'); 
+  if(!results || results.length === 0) throw new Error('Drink not found'); 
 
   const drinks = results.map((result) => {
     const resultJs = result.toJSON();
@@ -50,7 +51,7 @@ const getAll = async () => {
     return { drinks };
 }
 
-getByLetter = async (letter) => {
+const getByLetter = async (letter) => {
   const results = await Drinks.findAll(
     {
       where: {
@@ -62,7 +63,7 @@ getByLetter = async (letter) => {
     }
   )
 
-  if(!results) throw new Error('Drink not found'); 
+  if(!results || results.length === 0) throw new Error('Drink not found'); 
 
   const drinks = results.map((result) => {
     const resultJs = result.toJSON();

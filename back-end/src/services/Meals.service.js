@@ -3,7 +3,7 @@
 // const Sequelize = require('sequelize');
 const { Meals, MealsIngredients } = require('../database/models/index');
 // const config = require('../database/config/config');
-
+const {Op} = require('sequelize');
 // const sequelize = new Sequelize(config[env]);
 
 const getById = async (id) => {
@@ -15,7 +15,7 @@ const getById = async (id) => {
       ],
     },
   ); 
-  if (!result) throw new Error('Non-existent id');
+  if (!result || result.length === 0) throw new Error('Non-existent id');
   const resultJs = result.get();
   const {mealsToIngredients} = resultJs;
   delete resultJs.mealsToIngredients;
@@ -35,7 +35,7 @@ const getByName = async (name) => {
       ],
     }
     );
-  if(!results) throw new Error('Meal not found'); 
+  if(!results || results.length === 0) throw new Error('Meal not found'); 
 
   const meals = results.map((result) => {
     const resultJs = result.toJSON();
@@ -76,11 +76,11 @@ const getAll = async () => {
   return { meals };
 }
 
-getByLetter = async (letter) => {
+const getByLetter = async (letter) => {
   const results = await Meals.findAll(
     {
       where: {
-        str_meal: {[Op.like]: `${letter}%`}
+        str_meal: { [Op.like]: `${letter}%` }
       },
       include: [
         { model: MealsIngredients, as: 'mealsToIngredients' },
@@ -88,7 +88,7 @@ getByLetter = async (letter) => {
     }
   )
 
-  if(!results) throw new Error('Meal not found'); 
+  if(!results || result.length === 0) throw new Error('Meal not found'); 
 
   const meals = results.map((result) => {
     const resultJs = result.toJSON();
@@ -109,4 +109,5 @@ module.exports = {
   getByName,
   getAll,
   getById,
+  getByLetter
 }
