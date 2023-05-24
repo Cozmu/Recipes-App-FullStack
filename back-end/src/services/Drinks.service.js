@@ -181,7 +181,7 @@ const getByIngred = async (i) => {
 module.exports = {
   getByName,
   getAll,
-  getByLetter
+  getByLetter,
   getById,
   getByCateg,
   getByCategList,

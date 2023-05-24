@@ -18,7 +18,7 @@ function Meals() {
   } = useContext(RecipesAppContext);
 
   const firstRecipes = async () => {
-    const result = await requestRecipesFromAPI('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const result = await requestRecipesFromAPI('http://localhost:3001/meals');
     setFirstMeals(result);
   };
 

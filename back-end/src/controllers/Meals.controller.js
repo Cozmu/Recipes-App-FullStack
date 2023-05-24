@@ -72,7 +72,7 @@ module.exports = {
   getByName,
   getAll,
   getById,
-  getByLetter
+  getByLetter,
   category,
   categoryList,
   ingredients,

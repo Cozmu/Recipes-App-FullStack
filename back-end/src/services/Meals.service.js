@@ -187,7 +187,7 @@ module.exports = {
   getByName,
   getAll,
   getById,
-  getByLetter
+  getByLetter,
   getByCateg,
   getByCategList,
   getByIngred,
