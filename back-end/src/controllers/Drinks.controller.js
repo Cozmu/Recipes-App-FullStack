@@ -58,6 +58,15 @@ const categoryList = async (req, res, next) => {
   }
 };
 
+const ingredients = async (req, res, next) => {
+  try {
+    const { i } = req.params;
+    const result = await drinkService.getByIngred(i);
+    return res.status(200).json(result);
+  } catch (error) {
+    next({ ...error, message: error.message, status: 404 });
+  }
+};
 
 module.exports = {
   getByName,
@@ -66,4 +75,5 @@ module.exports = {
   getById,
   category,
   categoryList,
+  ingredients,
 }

@@ -1,6 +1,6 @@
 const { Drinks, DrinksIngredients } =  require('../database/models/index');
+const Sequelize = require('sequelize');
 const { Op } = require('sequelize');
-
 
 const getById = async (id) => {
   const result = await Drinks.findOne(
@@ -19,7 +19,7 @@ const getById = async (id) => {
     ...resultJs,
     ...drinksToIngredients.get()
   }
-  return { drinks: resultWithOutAlias };
+  return [resultWithOutAlias];
 };
 
 const getByName = async (name) => {
@@ -152,6 +152,32 @@ const getByCategList = async () => {
     return { drinks: sortedDrinks };
 };
 
+const getByIngred = async (i) => {
+  const colunasIngredientes = [];
+  for (let idx = 1; idx <= 15; idx++) {
+    const column = `strIngredient${idx}`;
+    colunasIngredientes.push({ [column]: i });
+  }
+
+  const result = await DrinksIngredients.findAll({
+    where: {
+      [Sequelize.Op.or]: colunasIngredientes
+    },
+    include: [
+      { model: Drinks, as: 'ingredientsToDrinks' },
+    ],
+  });
+  if (!result || result.length === 0) throw new Error('Non-existent ingredient');
+  const resultJs = result.map((drink) => {
+    const newDrink = drink.toJSON();
+    const ingr = newDrink.ingredientsToDrinks;
+    delete newDrink.ingredientsToDrinks;
+    console.log(ingr);
+    return {...ingr, ...newDrink}
+  });
+  return { drinks: resultJs };
+};
+
 module.exports = {
   getByName,
   getAll,
@@ -159,4 +185,5 @@ module.exports = {
   getById,
   getByCateg,
   getByCategList,
+  getByIngred,
 }

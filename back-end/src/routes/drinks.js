@@ -3,7 +3,7 @@ const drinksController = require('../controllers/Drinks.controller');
 
 const router = express.Router();
 
-
+router.get('/ingredients/:i', drinksController.ingredients);
 router.get('/name/:s', drinksController.getByName);
 router.get('/category/list', drinksController.categoryList);
 router.get('/category/:c', drinksController.category);
