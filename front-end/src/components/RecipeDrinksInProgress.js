@@ -45,7 +45,7 @@ function RecipeDrinksInProgress() {
 
   const requestDetails = async () => {
     const FIFTEEN = 15;
-    const request = await requestRecipesFromAPI(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idDaReceita}`);
+    const request = await requestRecipesFromAPI(`http://localhost:3001/drinks/${idDaReceita}`);
     const result = {
       id: request[0].idDrink,
       type: 'drink',
@@ -83,7 +83,6 @@ function RecipeDrinksInProgress() {
   };
 
   const finishRecipe = () => {
-    console.log('entrou');
     const recipe = newFav;
     const today = new Date().toLocaleDateString();
     let arrTags = [];

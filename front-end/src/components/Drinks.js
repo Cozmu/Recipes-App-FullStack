@@ -18,12 +18,12 @@ function Drinks() {
   } = useContext(RecipesAppContext);
 
   const firstRecipes = async () => {
-    const result = await requestRecipesFromAPI('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+    const result = await requestRecipesFromAPI('http://localhost:3001/drinks');
     setFirstDrinks(result);
   };
 
   const categorys = async () => {
-    const resultCategory = await requestRecipesFromAPI('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+    const resultCategory = await requestRecipesFromAPI('http://localhost:3001/drinks/category/list');
     setDrinksCategorys(resultCategory);
   };
 
@@ -33,11 +33,11 @@ function Drinks() {
       setFiltersCollection([]);
       setCurrentFilter('');
     } else if (filterParam === 'Cocktail') {
-      const resultCocktail = await requestRecipesFromAPI('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail');
+      const resultCocktail = await requestRecipesFromAPI('http://localhost:3001/drinks/category/Cocktail');
       setFiltersCollection(resultCocktail);
       setCurrentFilter(filterParam);
     } else {
-      const endPoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${filterParam}`;
+      const endPoint = `http://localhost:3001/drinks/category/${filterParam === 'Coffee / Tea' ? 'Coffee_Tea' : filterParam}`;
       const result = await requestRecipesFromAPI(endPoint);
       setFiltersCollection(result);
       setCurrentFilter(filterParam);
@@ -49,7 +49,7 @@ function Drinks() {
     firstRecipes();
   }, []);
 
-  const rendeizacao = (filtersCollection.length === 0
+  const rendeizacao = (filtersCollection?.length === 0
     ? display(TWELVE, firstDrinks).map(({ strDrinkThumb, strDrink, idDrink }, index) => (
       <NavLink
         to={ `/drinks/${idDrink}` }

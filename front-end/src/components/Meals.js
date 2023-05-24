@@ -23,7 +23,7 @@ function Meals() {
   };
 
   const categorys = async () => {
-    const resultCategory = await requestRecipesFromAPI('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+    const resultCategory = await requestRecipesFromAPI('http://localhost:3001/meals/category/list');
     setMealsCategorys(resultCategory);
   };
 
@@ -33,11 +33,11 @@ function Meals() {
       setFiltersCollection([]);
       setCurrentFilter('');
     } else if (filterParam === 'Beef') {
-      const resultBeef = await requestRecipesFromAPI('https://www.themealdb.com/api/json/v1/1/filter.php?c=Beef');
+      const resultBeef = await requestRecipesFromAPI('http://localhost:3001/meals/category/Beef');
       setFiltersCollection(resultBeef);
       setCurrentFilter(filterParam);
     } else {
-      const endPoint = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${filterParam}`;
+      const endPoint = `http://localhost:3001/meals/category/${filterParam}`;
       const result = await requestRecipesFromAPI(endPoint);
       setFiltersCollection(result);
       setCurrentFilter(filterParam);

@@ -10,7 +10,7 @@ import '../style/DetailsRecipes.css';
 
 function DetailsMeals() {
   const [newFav, setNewFav] = useState({});
-  const { inProgressRecipes, setInProgressRecipes } = useContext(RecipesAppContext);
+  const { inProgressRecipes, setInProgressRecipes, setRecipes } = useContext(RecipesAppContext);
   const history = useHistory();
   const SIX = 6;
   const [recipePhoto, setRecipePhoto] = useState('');
@@ -24,7 +24,7 @@ function DetailsMeals() {
 
   const displayDetails = async () => {
     const TWENTY = 20;
-    const request = await requestRecipesFromAPI(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idDaReceita}`);
+    const request = await requestRecipesFromAPI(`http://localhost:3001/meals/${idDaReceita}`);
     const result = {
       id: request[0].idMeal,
       type: 'meal',
@@ -47,7 +47,7 @@ function DetailsMeals() {
   };
 
   const requestRecommendations = async () => {
-    const result = await requestRecipesFromAPI('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+    const result = await requestRecipesFromAPI('http://localhost:3001/drinks');
     setRecommendations(result);
   };
 
@@ -78,6 +78,9 @@ function DetailsMeals() {
     <div>
       <section className="recipe-photo-container">
         <NavLink
+          onClick={ () => {
+            setRecipes([]);
+          } }
           to="/meals"
           className="back-icon"
         >

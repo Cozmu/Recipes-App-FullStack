@@ -24,13 +24,13 @@ const getById = async (id) => {
     ...resultJs,
     ...mealsToIngredients.get()
   }
-  return [ resultWithOutAlias ];
+  return { meals: [resultWithOutAlias]};
 };
 
 const getByName = async (name) => {
   const results = await Meals.findAll(
     {
-      where: {str_meal: name}, 
+      where: {str_meal: {[Op.like]: `%${name}%`}},
       include: [
         { model: MealsIngredients, as: 'mealsToIngredients' },
       ],

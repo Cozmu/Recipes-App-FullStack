@@ -18,21 +18,19 @@ function InteractionBtns({ idDaReceita, newFav, dataTestid }) {
 
   useEffect(() => {
     const storeFav = JSON.parse(localStorage.getItem('favoriteRecipes'));
-
-    if (storeFav?.some((e) => e.id === idDaReceita)) {
+    if (storeFav?.some((e) => Number(e.id) === Number(idDaReceita))) {
       setIsFavorite(<RiHeartFill className="filled-heart-icon" />);
     } else {
-      console.log('csadd');
       setIsFavorite(<RiHeartLine className="empty-heart-icon" />);
     }
   }, []);
 
   useEffect(() => {
-    if (favorites?.some((e) => e.id === idDaReceita)) {
+    if (favorites?.some((e) => Number(e.id) === Number(idDaReceita))) {
       setIsFavorite(<RiHeartFill className="filled-heart-icon" />);
     } else {
       if (pathname === '/favorite-recipes'
-       && favorites.length >= 1 && favorites?.some((e) => e.id !== idDaReceita)) {
+       && favorites.length >= 1 && favorites?.some((e) => Number(e.id) !== Number(idDaReceita))) {
         return setIsFavorite(<RiHeartFill className="filled-heart-icon" />);
       }
       setIsFavorite(<RiHeartLine className="empty-heart-icon" />);

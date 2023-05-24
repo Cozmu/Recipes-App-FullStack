@@ -30,14 +30,14 @@ function SearchBar() {
   const sendDrinks = async () => {
     let url = '';
     if (category === 'Ingredient') {
-      url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchFor}`;
+      url = `http://localhost:3001/drinks/ingredients/${searchFor}`;
     } else if (category === 'Name') {
-      url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchFor}`;
+      url = `http://localhost:3001/drinks/name/${searchFor}`;
     } else if (category === firstLetter) {
       if (searchFor.length > 1) {
         global.alert('Your search must have only 1 (one) character');
       } else {
-        url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchFor}`;
+        url = `http://localhost:3001/drinks/letter/${searchFor}`;
       }
     }
     const result = await requestRecipesFromAPI(url);
@@ -52,14 +52,14 @@ function SearchBar() {
   const sendMeal = async () => {
     let url = '';
     if (category === 'Ingredient') {
-      url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchFor}`;
+      url = `http://localhost:3001/meals/ingredients/${searchFor}`;
     } else if (category === 'Name') {
-      url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchFor}`;
+      url = `http://localhost:3001/meals/name/${searchFor}`;
     } else if (category === firstLetter) {
       if (searchFor.length > 1) {
         global.alert('Your search must have only 1 (one) character');
       } else {
-        url = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchFor}`;
+        url = `http://localhost:3001/meals/letter/${searchFor}`;
       }
     }
     const result = await requestRecipesFromAPI(url);

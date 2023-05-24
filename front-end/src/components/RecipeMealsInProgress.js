@@ -45,7 +45,7 @@ function RecipeMealsInProgress() {
 
   const requestDetails = async () => {
     const TWENTY = 20;
-    const request = await requestRecipesFromAPI(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idDaReceita}`);
+    const request = await requestRecipesFromAPI(`http://localhost:3001/meals/${idDaReceita}`);
     const result = {
       id: request[0].idMeal,
       type: 'meal',

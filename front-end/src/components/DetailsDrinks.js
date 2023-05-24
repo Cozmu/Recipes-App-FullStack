@@ -10,7 +10,7 @@ import '../style/DetailsRecipes.css';
 
 function DetailsDrinks() {
   const [newFav, setNewFav] = useState({});
-  const { inProgressRecipes, setInProgressRecipes } = useContext(RecipesAppContext);
+  const { inProgressRecipes, setInProgressRecipes, setRecipes } = useContext(RecipesAppContext);
   const history = useHistory();
   const SIX = 6;
   const [recipePhoto, setRecipePhoto] = useState('');
@@ -23,7 +23,7 @@ function DetailsDrinks() {
 
   const displayDetails = async () => {
     const FIFTEEN = 15;
-    const request = await requestRecipesFromAPI(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idDaReceita}`);
+    const request = await requestRecipesFromAPI(`http://localhost:3001/drinks/${idDaReceita}`);
     const result = {
       id: request[0].idDrink,
       type: 'drink',
@@ -43,7 +43,7 @@ function DetailsDrinks() {
   };
 
   const requestRecommendations = async () => {
-    const result = await requestRecipesFromAPI('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const result = await requestRecipesFromAPI('http://localhost:3001/meals');
     setRecommendations(result);
   };
 
@@ -74,7 +74,10 @@ function DetailsDrinks() {
     <div>
       <section className="recipe-photo-container">
         <NavLink
-          to="/drinks"
+          onClick={ () => {
+            setRecipes([]);
+          } }
+          to='/drinks'
           className="back-icon"
         >
           <IoChevronBackCircleSharp />

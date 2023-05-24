@@ -42,7 +42,7 @@ const getById = async (req, res, next) => {
 const category = async (req, res, next) => {
   try {
     const { c } = req.params;
-    const result = await drinkService.getByCateg(c);
+    const result = await drinkService.getByCateg(c === 'Coffee_Tea' ? 'Coffee / Tea' : c);
     return res.status(200).json(result);
   } catch (error) {
     next({ ...error, message: error.message, status: 404 });
@@ -71,7 +71,7 @@ const ingredients = async (req, res, next) => {
 module.exports = {
   getByName,
   getAll,
-  getByLetter
+  getByLetter,
   getById,
   category,
   categoryList,
