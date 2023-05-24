@@ -16,7 +16,6 @@ const getByName = async (name) => {
     const resultJs = result.toJSON();
     const { drinksToIngredients } = resultJs;
     delete resultJs.drinksToIngredients;
-    delete result.drinksToIngredients;
 
     const resultWithOutAlias = {
       ...resultJs, 
@@ -40,7 +39,6 @@ const getAll = async () => {
     const resultJs = result.toJSON();
     const { drinksToIngredients } = resultJs;
     delete resultJs.drinksToIngredients;
-    delete result.drinksToIngredients;
   
     const resultWithOutAlias = {
       ...resultJs, 
@@ -52,7 +50,37 @@ const getAll = async () => {
     return { drinks };
 }
 
+getByLetter = async (letter) => {
+  const results = await Drinks.findAll(
+    {
+      where: {
+        str_drink: {[Op.like]: `${letter}%`}
+      },
+      include: [
+        { model: DrinksIngredients, as: 'drinksToIngredients' },
+      ],
+    }
+  )
+
+  if(!results) throw new Error('Drink not found'); 
+
+  const drinks = results.map((result) => {
+    const resultJs = result.toJSON();
+    const { drinksToIngredients } = resultJs;
+    delete resultJs.drinksToIngredients;
+
+    const resultWithOutAlias = {
+      ...resultJs, 
+      ...drinksToIngredients
+    }
+    return resultWithOutAlias;
+  });
+
+  return { drinks };
+}
+
 module.exports = {
   getByName,
-  getAll
+  getAll,
+  getByLetter
 }
