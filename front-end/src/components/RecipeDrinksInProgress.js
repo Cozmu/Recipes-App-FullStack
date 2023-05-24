@@ -91,7 +91,7 @@ function RecipeDrinksInProgress() {
     } else {
       arrTags = tags.split(',');
     }
-    if (!doneRecipes?.some((e) => e.id === recipe.id)) {
+    if (!doneRecipes?.some((e) => e.id === recipe.id && e.type === recipe.type)) {
       setDoneRecipes([
         ...doneRecipes,
         {

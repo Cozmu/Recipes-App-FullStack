@@ -91,7 +91,7 @@ function RecipeMealsInProgress() {
     } else {
       arrTags = tags.split(',');
     }
-    if (!doneRecipes?.some((e) => e.id === recipe.id)) {
+    if (!doneRecipes?.some((e) => e.id === recipe.id && e.type === recipe.type)) {
       setDoneRecipes([
         ...doneRecipes,
         {
@@ -184,7 +184,7 @@ function RecipeMealsInProgress() {
         data-testid="finish-recipe-btn"
         type="button"
         disabled={ itsFinished }
-        onClick={ finishRecipe }
+        onClick={ () => finishRecipe() }
       >
         Finalizar
       </button>
