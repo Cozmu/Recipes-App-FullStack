@@ -7,7 +7,8 @@ router.get('/ingredients/:i', mealsController.ingredients);
 router.get('/category/list', mealsController.categoryList);
 router.get('/category/:c', mealsController.category);
 router.get('/:id', mealsController.getById);
-router.get('/:s', mealsController.getByName);
+router.get('/name/:s', mealsController.getByName);
 router.get('/', mealsController.getAll);
+router.get('/letter/:f', mealsController.getByLetter);
 
 module.exports = router;

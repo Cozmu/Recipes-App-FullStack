@@ -19,6 +19,16 @@ const getAll = async (req, res, next) => {
   }
 }
 
+const getByLetter = async (req, res, next) => {
+  try {
+    const { f } = req.params;
+    const result = await drinkService.getByLetter(f);
+    return res.status(200).json(result);
+  } catch (error) {
+    next({...error, message: error.message, status: 404});
+  }
+}
+
 const getById = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -61,6 +71,7 @@ const ingredients = async (req, res, next) => {
 module.exports = {
   getByName,
   getAll,
+  getByLetter
   getById,
   category,
   categoryList,
