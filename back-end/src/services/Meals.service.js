@@ -35,7 +35,7 @@ const getByName = async (name) => {
       ],
     }
     );
-  if(!results || results.length === 0) throw new Error('Meal not found'); 
+  if(!results) throw new Error('Meal not found'); 
 
   const meals = results.map((result) => {
     const resultJs = result.toJSON();

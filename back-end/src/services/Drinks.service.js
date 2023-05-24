@@ -1,7 +1,7 @@
 const { Drinks, DrinksIngredients } =  require('../database/models/index');
 
 const getByName = async (name) => {
-  const result = await Drinks.findOne(
+  const results = await Drinks.findAll(
     {
       where: {str_drink: name},
       include: [
@@ -10,33 +10,46 @@ const getByName = async (name) => {
     }
   );
 
-  if(!result) throw new Error('Drink not found'); 
-  const resultJs = result.get();
-  const { drinksToIngredients } = resultJs;
-  delete resultJs.drinksToIngredients;
-  const resultWithOutAlias = {
-    ...resultJs,
-    ...drinksToIngredients.get()
-  }
-  return {drinks: resultWithOutAlias};
+  if(!results) throw new Error('Drink not found'); 
+
+  const drinks = results.map((result) => {
+    const resultJs = result.toJSON();
+    const { drinksToIngredients } = resultJs;
+    delete resultJs.drinksToIngredients;
+    delete result.drinksToIngredients;
+
+    const resultWithOutAlias = {
+      ...resultJs, 
+      ...drinksToIngredients
+    }
+    return resultWithOutAlias;
+  });
+
+  return { drinks };
 }
 
 const getAll = async () => {
-  const result = await Drinks.findAll(
+  const results = await Drinks.findAll(
     {
       include: [
         { model: DrinksIngredients, as: 'drinksToIngredients' },
       ],
     });
 
-  const resultJs = result.get();
-  const { drinksToIngredients } = resultJs;
-  delete resultJs.drinksToIngredients;
-  const resultWithOutAlias = {
-    ...resultJs,
-    ...drinksToIngredients.get()
-  }
-  return {drinks: resultWithOutAlias};
+  const drinks = results.map((result) => {
+    const resultJs = result.toJSON();
+    const { drinksToIngredients } = resultJs;
+    delete resultJs.drinksToIngredients;
+    delete result.drinksToIngredients;
+  
+    const resultWithOutAlias = {
+      ...resultJs, 
+      ...drinksToIngredients
+    }
+    return resultWithOutAlias;
+  });
+  
+    return { drinks };
 }
 
 module.exports = {
