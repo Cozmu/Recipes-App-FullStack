@@ -19,13 +19,13 @@ function Meals() {
   } = useContext(RecipesAppContext);
 
   const firstRecipes = async () => {
-    const result = await requestRecipesFromAPI(`${HOST}${PROTOCOL}/meals`);
+    const result = await requestRecipesFromAPI(`${PROTOCOL}${HOST}/meals`);
     setFirstMeals(result);
   };
 
   const categorys = async () => {
     const resultCategory = await requestRecipesFromAPI(
-      `${HOST}${PROTOCOL}/meals/category/list`,
+      `${PROTOCOL}${HOST}/meals/category/list`,
     );
     setMealsCategorys(resultCategory);
   };
@@ -37,12 +37,12 @@ function Meals() {
       setCurrentFilter('');
     } else if (filterParam === 'Beef') {
       const resultBeef = await requestRecipesFromAPI(
-        `${HOST}${PROTOCOL}/meals/category/Beef`,
+        `${PROTOCOL}${HOST}/meals/category/Beef`,
       );
       setFiltersCollection(resultBeef);
       setCurrentFilter(filterParam);
     } else {
-      const endPoint = `${HOST}${PROTOCOL}/meals/category/${filterParam}`;
+      const endPoint = `${PROTOCOL}${HOST}/meals/category/${filterParam}`;
       const result = await requestRecipesFromAPI(endPoint);
       setFiltersCollection(result);
       setCurrentFilter(filterParam);

@@ -31,14 +31,14 @@ function SearchBar() {
   const sendDrinks = async () => {
     let url = '';
     if (category === 'Ingredient') {
-      url = `${HOST}${PROTOCOL}/drinks/ingredients/${searchFor}`;
+      url = `${PROTOCOL}${HOST}/drinks/ingredients/${searchFor}`;
     } else if (category === 'Name') {
-      url = `${HOST}${PROTOCOL}/drinks/name/${searchFor}`;
+      url = `${PROTOCOL}${HOST}/drinks/name/${searchFor}`;
     } else if (category === firstLetter) {
       if (searchFor.length > 1) {
         global.alert('Your search must have only 1 (one) character');
       } else {
-        url = `${HOST}${PROTOCOL}/drinks/letter/${searchFor}`;
+        url = `${PROTOCOL}${HOST}/drinks/letter/${searchFor}`;
       }
     }
     const result = await requestRecipesFromAPI(url);
@@ -53,14 +53,14 @@ function SearchBar() {
   const sendMeal = async () => {
     let url = '';
     if (category === 'Ingredient') {
-      url = `${HOST}${PROTOCOL}/meals/ingredients/${searchFor}`;
+      url = `${PROTOCOL}${HOST}/meals/ingredients/${searchFor}`;
     } else if (category === 'Name') {
-      url = `${HOST}${PROTOCOL}/meals/name/${searchFor}`;
+      url = `${PROTOCOL}${HOST}/meals/name/${searchFor}`;
     } else if (category === firstLetter) {
       if (searchFor.length > 1) {
         global.alert('Your search must have only 1 (one) character');
       } else {
-        url = `${HOST}${PROTOCOL}/meals/letter/${searchFor}`;
+        url = `${PROTOCOL}${HOST}/meals/letter/${searchFor}`;
       }
     }
     const result = await requestRecipesFromAPI(url);

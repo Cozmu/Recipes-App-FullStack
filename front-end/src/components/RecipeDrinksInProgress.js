@@ -47,7 +47,7 @@ function RecipeDrinksInProgress() {
   const requestDetails = async () => {
     const FIFTEEN = 15;
     const request = await requestRecipesFromAPI(
-      `${HOST}${PROTOCOL}/drinks/${idDaReceita}`,
+      `${PROTOCOL}${HOST}/drinks/${idDaReceita}`,
     );
     const result = {
       id: request[0].idDrink,
