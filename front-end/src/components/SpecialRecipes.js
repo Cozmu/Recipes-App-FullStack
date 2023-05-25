@@ -1,10 +1,11 @@
-import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
-import InteractionBtns from './InteractionBtns';
 import '../style/SpecialRecipes.css';
+import { LOCAL, PROTOCOL } from '../utils/makeUrl';
+import InteractionBtns from './InteractionBtns';
 
 function SpecialRecipes({ localRecipe }) {
   const [recipes, setRecipes] = useState([]);
@@ -19,7 +20,8 @@ function SpecialRecipes({ localRecipe }) {
   const handleCopy = (elemento) => {
     const TIME = 3000;
     setToggleShare(elemento.name);
-    copy(`http://localhost:3000/${elemento.type === 'meal' ? 'meals' : 'drinks'}/${elemento.id}`);
+    copy(`${PROTOCOL}${LOCAL}/${
+      elemento.type === 'meal' ? 'meals' : 'drinks'}/${elemento.id}`);
     setTimeout(() => {
       setToggleShare('');
     }, TIME);

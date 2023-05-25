@@ -1,16 +1,18 @@
-import { useEffect, useState, useContext } from 'react';
-import { useParams, NavLink, useHistory } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
 import { IoChevronBackCircleSharp } from 'react-icons/io5';
-import requestRecipesFromAPI from '../services/requestRecipesFromAPI';
-import display from '../helpers/display';
+import { NavLink, useHistory, useParams } from 'react-router-dom';
 import RecipesAppContext from '../context/RecipesAppContext';
-import InteractionBtns from './InteractionBtns';
+import display from '../helpers/display';
 import handleFilter from '../helpers/handleFilter';
+import requestRecipesFromAPI from '../services/requestRecipesFromAPI';
 import '../style/DetailsRecipes.css';
+import { HOST, PROTOCOL } from '../utils/makeUrl';
+import InteractionBtns from './InteractionBtns';
 
 function DetailsDrinks() {
   const [newFav, setNewFav] = useState({});
-  const { inProgressRecipes, setInProgressRecipes, setRecipes } = useContext(RecipesAppContext);
+  const { inProgressRecipes,
+    setInProgressRecipes, setRecipes } = useContext(RecipesAppContext);
   const history = useHistory();
   const SIX = 6;
   const [recipePhoto, setRecipePhoto] = useState('');
@@ -23,7 +25,9 @@ function DetailsDrinks() {
 
   const displayDetails = async () => {
     const FIFTEEN = 15;
-    const request = await requestRecipesFromAPI(`http://localhost:3001/drinks/${idDaReceita}`);
+    const request = await requestRecipesFromAPI(
+      `${HOST}${PROTOCOL}/drinks/${idDaReceita}`,
+    );
     const result = {
       id: request[0].idDrink,
       type: 'drink',
@@ -43,7 +47,7 @@ function DetailsDrinks() {
   };
 
   const requestRecommendations = async () => {
-    const result = await requestRecipesFromAPI('http://localhost:3001/meals');
+    const result = await requestRecipesFromAPI(`${HOST}${PROTOCOL}/meals`);
     setRecommendations(result);
   };
 
@@ -77,7 +81,7 @@ function DetailsDrinks() {
           onClick={ () => {
             setRecipes([]);
           } }
-          to='/drinks'
+          to="/drinks"
           className="back-icon"
         >
           <IoChevronBackCircleSharp />

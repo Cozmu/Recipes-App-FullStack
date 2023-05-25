@@ -1,9 +1,10 @@
-import { useEffect, useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
+import { useHistory } from 'react-router-dom';
 import RecipesAppContext from '../context/RecipesAppContext';
 import requestRecipesFromAPI from '../services/requestRecipesFromAPI';
 import '../style/SearchBar.css';
+import { HOST, PROTOCOL } from '../utils/makeUrl';
 
 function SearchBar() {
   const [category, setCategory] = useState('');
@@ -30,14 +31,14 @@ function SearchBar() {
   const sendDrinks = async () => {
     let url = '';
     if (category === 'Ingredient') {
-      url = `http://localhost:3001/drinks/ingredients/${searchFor}`;
+      url = `${HOST}${PROTOCOL}/drinks/ingredients/${searchFor}`;
     } else if (category === 'Name') {
-      url = `http://localhost:3001/drinks/name/${searchFor}`;
+      url = `${HOST}${PROTOCOL}/drinks/name/${searchFor}`;
     } else if (category === firstLetter) {
       if (searchFor.length > 1) {
         global.alert('Your search must have only 1 (one) character');
       } else {
-        url = `http://localhost:3001/drinks/letter/${searchFor}`;
+        url = `${HOST}${PROTOCOL}/drinks/letter/${searchFor}`;
       }
     }
     const result = await requestRecipesFromAPI(url);
@@ -52,14 +53,14 @@ function SearchBar() {
   const sendMeal = async () => {
     let url = '';
     if (category === 'Ingredient') {
-      url = `http://localhost:3001/meals/ingredients/${searchFor}`;
+      url = `${HOST}${PROTOCOL}/meals/ingredients/${searchFor}`;
     } else if (category === 'Name') {
-      url = `http://localhost:3001/meals/name/${searchFor}`;
+      url = `${HOST}${PROTOCOL}/meals/name/${searchFor}`;
     } else if (category === firstLetter) {
       if (searchFor.length > 1) {
         global.alert('Your search must have only 1 (one) character');
       } else {
-        url = `http://localhost:3001/meals/letter/${searchFor}`;
+        url = `${HOST}${PROTOCOL}/meals/letter/${searchFor}`;
       }
     }
     const result = await requestRecipesFromAPI(url);

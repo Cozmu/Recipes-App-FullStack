@@ -1,11 +1,12 @@
-import { useState, useEffect, useContext } from 'react';
-import { NavLink, useParams, useHistory } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
 import { IoChevronBackCircleSharp } from 'react-icons/io5';
+import { NavLink, useHistory, useParams } from 'react-router-dom';
 import RecipesAppContext from '../context/RecipesAppContext';
-import requestRecipesFromAPI from '../services/requestRecipesFromAPI';
 import handleFilter from '../helpers/handleFilter';
-import InteractionBtns from './InteractionBtns';
+import requestRecipesFromAPI from '../services/requestRecipesFromAPI';
 import '../style/DetailsRecipes.css';
+import { HOST, PROTOCOL } from '../utils/makeUrl';
+import InteractionBtns from './InteractionBtns';
 
 function RecipeDrinksInProgress() {
   const history = useHistory();
@@ -45,7 +46,9 @@ function RecipeDrinksInProgress() {
 
   const requestDetails = async () => {
     const FIFTEEN = 15;
-    const request = await requestRecipesFromAPI(`http://localhost:3001/drinks/${idDaReceita}`);
+    const request = await requestRecipesFromAPI(
+      `${HOST}${PROTOCOL}/drinks/${idDaReceita}`,
+    );
     const result = {
       id: request[0].idDrink,
       type: 'drink',
