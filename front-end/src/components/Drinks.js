@@ -19,13 +19,13 @@ function Drinks() {
   } = useContext(RecipesAppContext);
 
   const firstRecipes = async () => {
-    const result = await requestRecipesFromAPI(`${HOST}${PROTOCOL}/drinks`);
+    const result = await requestRecipesFromAPI(`${PROTOCOL}${HOST}/drinks`);
     setFirstDrinks(result);
   };
 
   const categorys = async () => {
     const resultCategory = await requestRecipesFromAPI(
-      `${HOST}${PROTOCOL}/drinks/category/list`,
+      `${PROTOCOL}${HOST}/drinks/category/list`,
     );
     setDrinksCategorys(resultCategory);
   };
@@ -37,12 +37,12 @@ function Drinks() {
       setCurrentFilter('');
     } else if (filterParam === 'Cocktail') {
       const resultCocktail = await requestRecipesFromAPI(
-        `${HOST}${PROTOCOL}/drinks/category/Cocktail`,
+        `${PROTOCOL}${HOST}/drinks/category/Cocktail`,
       );
       setFiltersCollection(resultCocktail);
       setCurrentFilter(filterParam);
     } else {
-      const endPoint = `${HOST}${PROTOCOL}/drinks/category/${
+      const endPoint = `${PROTOCOL}${HOST}/drinks/category/${
         filterParam === 'Coffee / Tea' ? 'Coffee_Tea' : filterParam}`;
       const result = await requestRecipesFromAPI(endPoint);
       setFiltersCollection(result);

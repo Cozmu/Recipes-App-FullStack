@@ -26,7 +26,7 @@ function DetailsDrinks() {
   const displayDetails = async () => {
     const FIFTEEN = 15;
     const request = await requestRecipesFromAPI(
-      `${HOST}${PROTOCOL}/drinks/${idDaReceita}`,
+      `${PROTOCOL}${HOST}/drinks/${idDaReceita}`,
     );
     const result = {
       id: request[0].idDrink,
@@ -47,7 +47,7 @@ function DetailsDrinks() {
   };
 
   const requestRecommendations = async () => {
-    const result = await requestRecipesFromAPI(`${HOST}${PROTOCOL}/meals`);
+    const result = await requestRecipesFromAPI(`${PROTOCOL}${HOST}/meals`);
     setRecommendations(result);
   };
 
