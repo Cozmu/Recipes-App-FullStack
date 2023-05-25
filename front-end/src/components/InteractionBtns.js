@@ -1,13 +1,14 @@
-import PropTypes from 'prop-types';
-import { useEffect, useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
-import { RiHeartLine, RiHeartFill } from 'react-icons/ri';
+import PropTypes from 'prop-types';
+import { useContext, useEffect, useState } from 'react';
+import { RiHeartFill, RiHeartLine } from 'react-icons/ri';
+import { useHistory } from 'react-router-dom';
 import RecipesAppContext from '../context/RecipesAppContext';
 import shareIcon from '../images/shareIcon.svg';
 // import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 // import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../style/InteractionBtns.css';
+import { LOCAL, PROTOCOL } from '../utils/makeUrl';
 
 function InteractionBtns({ idDaReceita, newFav, dataTestid }) {
   const [toggleShare, setToggleShare] = useState(false);
@@ -30,7 +31,8 @@ function InteractionBtns({ idDaReceita, newFav, dataTestid }) {
       setIsFavorite(<RiHeartFill className="filled-heart-icon" />);
     } else {
       if (pathname === '/favorite-recipes'
-       && favorites.length >= 1 && favorites?.some((e) => Number(e.id) !== Number(idDaReceita))) {
+       && favorites.length >= 1
+       && favorites?.some((e) => Number(e.id) !== Number(idDaReceita))) {
         return setIsFavorite(<RiHeartFill className="filled-heart-icon" />);
       }
       setIsFavorite(<RiHeartLine className="empty-heart-icon" />);
@@ -70,7 +72,8 @@ function InteractionBtns({ idDaReceita, newFav, dataTestid }) {
            onClick={ () => {
              const TIME = 3000;
              setToggleShare(true);
-             copy(`http://localhost:3000/${pathname.includes('meals') ? 'meals' : 'drinks'}/${idDaReceita}`);
+             copy(`${PROTOCOL}${LOCAL}/${pathname.includes('meals')
+               ? 'meals' : 'drinks'}/${idDaReceita}`);
              setTimeout(() => {
                setToggleShare(false);
              }, TIME);

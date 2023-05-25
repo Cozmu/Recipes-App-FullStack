@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import RecipesAppContext from '../context/RecipesAppContext';
-import requestRecipesFromAPI from '../services/requestRecipesFromAPI';
 import display from '../helpers/display';
+import requestRecipesFromAPI from '../services/requestRecipesFromAPI';
 import '../style/MealsDrinks.css';
+import { HOST, PROTOCOL } from '../utils/makeUrl';
 
 function Drinks() {
   const [firstDrinks, setFirstDrinks] = useState([]);
@@ -18,12 +19,14 @@ function Drinks() {
   } = useContext(RecipesAppContext);
 
   const firstRecipes = async () => {
-    const result = await requestRecipesFromAPI('http://localhost:3001/drinks');
+    const result = await requestRecipesFromAPI(`${HOST}${PROTOCOL}/drinks`);
     setFirstDrinks(result);
   };
 
   const categorys = async () => {
-    const resultCategory = await requestRecipesFromAPI('http://localhost:3001/drinks/category/list');
+    const resultCategory = await requestRecipesFromAPI(
+      `${HOST}${PROTOCOL}/drinks/category/list`,
+    );
     setDrinksCategorys(resultCategory);
   };
 
@@ -33,11 +36,14 @@ function Drinks() {
       setFiltersCollection([]);
       setCurrentFilter('');
     } else if (filterParam === 'Cocktail') {
-      const resultCocktail = await requestRecipesFromAPI('http://localhost:3001/drinks/category/Cocktail');
+      const resultCocktail = await requestRecipesFromAPI(
+        `${HOST}${PROTOCOL}/drinks/category/Cocktail`,
+      );
       setFiltersCollection(resultCocktail);
       setCurrentFilter(filterParam);
     } else {
-      const endPoint = `http://localhost:3001/drinks/category/${filterParam === 'Coffee / Tea' ? 'Coffee_Tea' : filterParam}`;
+      const endPoint = `${HOST}${PROTOCOL}/drinks/category/${
+        filterParam === 'Coffee / Tea' ? 'Coffee_Tea' : filterParam}`;
       const result = await requestRecipesFromAPI(endPoint);
       setFiltersCollection(result);
       setCurrentFilter(filterParam);

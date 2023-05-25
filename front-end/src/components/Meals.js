@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import RecipesAppContext from '../context/RecipesAppContext';
-import requestRecipesFromAPI from '../services/requestRecipesFromAPI';
 import display from '../helpers/display';
+import requestRecipesFromAPI from '../services/requestRecipesFromAPI';
 import '../style/MealsDrinks.css';
+import { HOST, PROTOCOL } from '../utils/makeUrl';
 
 function Meals() {
   const [firstMeals, setFirstMeals] = useState([]);
@@ -18,12 +19,14 @@ function Meals() {
   } = useContext(RecipesAppContext);
 
   const firstRecipes = async () => {
-    const result = await requestRecipesFromAPI('http://localhost:3001/meals');
+    const result = await requestRecipesFromAPI(`${HOST}${PROTOCOL}/meals`);
     setFirstMeals(result);
   };
 
   const categorys = async () => {
-    const resultCategory = await requestRecipesFromAPI('http://localhost:3001/meals/category/list');
+    const resultCategory = await requestRecipesFromAPI(
+      `${HOST}${PROTOCOL}/meals/category/list`,
+    );
     setMealsCategorys(resultCategory);
   };
 
@@ -33,11 +36,13 @@ function Meals() {
       setFiltersCollection([]);
       setCurrentFilter('');
     } else if (filterParam === 'Beef') {
-      const resultBeef = await requestRecipesFromAPI('http://localhost:3001/meals/category/Beef');
+      const resultBeef = await requestRecipesFromAPI(
+        `${HOST}${PROTOCOL}/meals/category/Beef`,
+      );
       setFiltersCollection(resultBeef);
       setCurrentFilter(filterParam);
     } else {
-      const endPoint = `http://localhost:3001/meals/category/${filterParam}`;
+      const endPoint = `${HOST}${PROTOCOL}/meals/category/${filterParam}`;
       const result = await requestRecipesFromAPI(endPoint);
       setFiltersCollection(result);
       setCurrentFilter(filterParam);
