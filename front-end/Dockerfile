@@ -3,5 +3,6 @@ WORKDIR /front-end
 COPY ./package*.json ./
 RUN npm install
 COPY . ./
+ARG EnvironmentVariable
 EXPOSE 3000
 CMD [ "npm", "start" ]
